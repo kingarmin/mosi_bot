@@ -1,19 +1,19 @@
 #include "SoftwareSerial.h"
-// #include "DFRobotDFPlayerMini.h"
+#include "DFRobotDFPlayerMini.h"
 //#include <Adafruit_PWMServoDriver.h>
-// #include <Wire.h>
+#include <Wire.h>
 #include "LedControl.h"
-// #define trig 11
-// #define echo 12
-// #define reciver 7
+#define trig 11
+#define echo 12
+#define reciver 7
 LedControl lc = LedControl(2, 4, 3, 4);
 unsigned long current = 0, old = 0, old2 = 0, duration = 0, distance = 0;
 //trig pin , echo pin
-// int last_srf = 0;
-// static const uint8_t PIN_MP3_TX = 5;
-// static const uint8_t PIN_MP3_RX = 6;
-//SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
-// DFRobotDFPlayerMini player;
+int last_srf = 0;
+static const uint8_t PIN_MP3_TX = 5;
+static const uint8_t PIN_MP3_RX = 6;
+SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
+DFRobotDFPlayerMini player;
 //-------------------------------------------------------------------- bytes
 byte openeye[] = {
   B00000000,
@@ -70,12 +70,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            case 1:
-              lc.setRow(j, i, openeye[i]);
-              break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, openeye[i]);
+            // case 1:
+            //   lc.setRow(j, i, openeye[i]);
             //   break;
+            case 2:
+              lc.setRow(j, 7 - i, openeye[i]);
+              break;
           }
         }
       }
@@ -85,12 +85,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            // case 0:
-            //   lc.setRow(j, 7-i, openmouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j, i, openmouth[i]);
+            case 0:
+              lc.setRow(j, 7-i, openmouth[i]);
               break;
+            // case 3:
+            //   lc.setRow(j, 7 - i, openmouth[i]);
+            //   break;
           }
         }
       }
@@ -101,12 +101,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            // case 0:
-            //   lc.setRow(j, 7-i, closemouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j, i, closemouth[i]);
+            case 0:
+              lc.setRow(j, 7-i, closemouth[i]);
               break;
+            // case 3:
+            //   lc.setRow(j, 7 - i, closemouth[i]);
+            //   break;
           }
         }
       }
@@ -116,12 +116,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            case 1:
-              lc.setRow(j, i, closeeye[i]);
-              break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, closeeye[i]);
+            // case 1:
+            //   lc.setRow(j, i, closeeye[i]);
             //   break;
+            case 2:
+              lc.setRow(j, 7 - i, closeeye[i]);
+              break;
           }
         }
       }
@@ -131,12 +131,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            case 1:
-              lc.setRow(j, i, openeye[i]);
-              break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, openeye[i]);
+            // case 1:
+            //   lc.setRow(j, i, openeye[i]);
             //   break;
+            case 2:
+              lc.setRow(j, 7 - i, openeye[i]);
+              break;
           }
         }
       }
@@ -146,12 +146,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            // case 0:
-            //   lc.setRow(j, 7-i, openmouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j,  i, openmouth[i]);
+            case 0:
+              lc.setRow(j, 7-i, openmouth[i]);
               break;
+            // case 3:
+            //   lc.setRow(j, 7 - i, openmouth[i]);
+            //   break;
           }
         }
       }
@@ -162,12 +162,12 @@ void face_talk() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            // case 0:
-            //   lc.setRow(j, 7-i, closemouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j, i, closemouth[i]);
+            case 0:
+              lc.setRow(j, 7-i, closemouth[i]);
               break;
+            // case 3:
+            //   lc.setRow(j, 7 - i, closemouth[i]);
+            //   break;
           }
         }
       }
@@ -180,12 +180,12 @@ void face_free() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            case 1:
-              lc.setRow(j, i, closeeye[i]);
-              break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, closeeye[i]);
+            // case 1:
+            //   lc.setRow(j, i, closeeye[i]);
             //   break;
+            case 2:
+              lc.setRow(j, 7 - i, closeeye[i]);
+              break;
           }
         }
       }
@@ -195,12 +195,12 @@ void face_free() {
       for (int j = 0; j < 9; j++) {
         for (int i = 0; i < 9; i++) {
           switch (j) {
-            // case 0:
-            //   lc.setRow(j, i, mouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j, i, mouth[i]);
+            case 0:
+              lc.setRow(j, 7-i, mouth[i]);
               break;
+            // case 3:
+            //   lc.setRow(j, 7 - i, mouth[i]);
+            //   break;
           }
         }
       }
@@ -210,12 +210,12 @@ void face_free() {
        for (int j = 0; j < 9; j++) {
          for (int i = 0; i < 9; i++) {
            switch (j) {
-             case 1:
-               lc.setRow(j, i, openeye[i]);
-               break;
-            //  case 2:
-            //    lc.setRow(j, 7 - i, openeye[i]);
+            //  case 1:
+            //    lc.setRow(j, i, openeye[i]);
             //    break;
+             case 2:
+               lc.setRow(j, 7 - i, openeye[i]);
+               break;
            }
          }
        }
@@ -225,7 +225,7 @@ void face_free() {
 }
 void setup() {
   // put your setup code here, to run once:
-  // pinMode(reciver, INPUT);
+  pinMode(reciver, INPUT);
   int devices = lc.getDeviceCount();
   for (int address = 0; address < devices; address++) {
     lc.shutdown(address, false);
@@ -234,9 +234,23 @@ void setup() {
   }
   Serial.begin(9600);
   face_free();
-  delay(1000);
   face_talk();
 }
-
+bool MODE = 0;
 void loop() {
+  // put your main code here, to run repeatedly:
+  int reciver_val=digitalRead(reciver);
+  Serial.println(reciver_val);
+  if (reciver_val==1 and MODE == 1) {
+    int time = millis();
+    //delay(500);
+    face_talk();
+    while (millis() - time < 3500);
+    delay(200);
+    MODE = 0;
+    //face_free();
+  } else if (MODE == 0) {
+    face_free();
+    MODE = 1;
+  }
 }
