@@ -86,11 +86,11 @@ void face_talk() {
         for (int i = 0; i < 9; i++) {
           switch (j) {
             case 0:
-              lc.setRow(j, 7-i, openmouth[i]);
+              lc.setRow(j, 7 - i, openmouth[i]);
               break;
-            // case 3:
-            //   lc.setRow(j, 7 - i, openmouth[i]);
-            //   break;
+              // case 3:
+              //   lc.setRow(j, 7 - i, openmouth[i]);
+              //   break;
           }
         }
       }
@@ -102,11 +102,11 @@ void face_talk() {
         for (int i = 0; i < 9; i++) {
           switch (j) {
             case 0:
-              lc.setRow(j, 7-i, closemouth[i]);
+              lc.setRow(j, 7 - i, closemouth[i]);
               break;
-            // case 3:
-            //   lc.setRow(j, 7 - i, closemouth[i]);
-            //   break;
+              // case 3:
+              //   lc.setRow(j, 7 - i, closemouth[i]);
+              //   break;
           }
         }
       }
@@ -147,27 +147,11 @@ void face_talk() {
         for (int i = 0; i < 9; i++) {
           switch (j) {
             case 0:
-              lc.setRow(j, 7-i, openmouth[i]);
+              lc.setRow(j, 7 - i, openmouth[i]);
               break;
-            // case 3:
-            //   lc.setRow(j, 7 - i, openmouth[i]);
-            //   break;
-          }
-        }
-      }
-    }
-
-    delay(100);
-    if (p == 6) {
-      for (int j = 0; j < 9; j++) {
-        for (int i = 0; i < 9; i++) {
-          switch (j) {
-            case 0:
-              lc.setRow(j, 7-i, closemouth[i]);
-              break;
-            // case 3:
-            //   lc.setRow(j, 7 - i, closemouth[i]);
-            //   break;
+              // case 3:
+              //   lc.setRow(j, 7 - i, openmouth[i]);
+              //   break;
           }
         }
       }
@@ -196,30 +180,30 @@ void face_free() {
         for (int i = 0; i < 9; i++) {
           switch (j) {
             case 0:
-              lc.setRow(j, 7-i, mouth[i]);
+              lc.setRow(j, 7 - i, mouth[i]);
               break;
-            // case 3:
-            //   lc.setRow(j, 7 - i, mouth[i]);
-            //   break;
+              // case 3:
+              //   lc.setRow(j, 7 - i, mouth[i]);
+              //   break;
           }
         }
       }
     }
     delay(10);
-     if (p == 2) {
-       for (int j = 0; j < 9; j++) {
-         for (int i = 0; i < 9; i++) {
-           switch (j) {
-            //  case 1:
-            //    lc.setRow(j, i, openeye[i]);
-            //    break;
-             case 2:
-               lc.setRow(j, 7 - i, openeye[i]);
-               break;
-           }
-         }
-       }
-     }
+    if (p == 2) {
+      for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < 9; i++) {
+          switch (j) {
+              //  case 1:
+              //    lc.setRow(j, i, openeye[i]);
+              //    break;
+            case 2:
+              lc.setRow(j, 7 - i, openeye[i]);
+              break;
+          }
+        }
+      }
+    }
     delay(600);
   }
 }
@@ -235,18 +219,19 @@ void setup() {
   Serial.begin(9600);
   face_free();
   face_talk();
+  delay(5000);
 }
 bool MODE = 0;
 void loop() {
   // put your main code here, to run repeatedly:
-  int reciver_val=digitalRead(reciver);
+  int reciver_val = digitalRead(reciver);
   Serial.println(reciver_val);
-  if (reciver_val==1 and MODE == 1) {
+  if (reciver_val == 1 and MODE == 1) {
     int time = millis();
     //delay(500);
     face_talk();
-    while (millis() - time < 3500);
-    delay(200);
+    while (millis() - time < 20500)
+      ;
     MODE = 0;
     //face_free();
   } else if (MODE == 0) {

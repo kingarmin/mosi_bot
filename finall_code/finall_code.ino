@@ -10,8 +10,8 @@ LedControl lc = LedControl(2, 4, 3, 4);
 unsigned long current = 0, old = 0, old2 = 0, duration = 0, distance = 0;
 //trig pin , echo pin
 int last_srf = 0;
-static const uint8_t PIN_MP3_TX = 5;
-static const uint8_t PIN_MP3_RX = 6;
+static const uint8_t PIN_MP3_TX = 6;
+static const uint8_t PIN_MP3_RX = 5;
 SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
 DFRobotDFPlayerMini player;
 //-------------------------------------------------------------------- bytes
@@ -73,9 +73,9 @@ void face_talk() {
             case 1:
               lc.setRow(j, i, openeye[i]);
               break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, openeye[i]);
-            //   break;
+              // case 2:
+              //   lc.setRow(j, 7 - i, openeye[i]);
+              //   break;
           }
         }
       }
@@ -119,9 +119,9 @@ void face_talk() {
             case 1:
               lc.setRow(j, i, closeeye[i]);
               break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, closeeye[i]);
-            //   break;
+              // case 2:
+              //   lc.setRow(j, 7 - i, closeeye[i]);
+              //   break;
           }
         }
       }
@@ -134,9 +134,9 @@ void face_talk() {
             case 1:
               lc.setRow(j, i, openeye[i]);
               break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, openeye[i]);
-            //   break;
+              // case 2:
+              //   lc.setRow(j, 7 - i, openeye[i]);
+              //   break;
           }
         }
       }
@@ -150,23 +150,7 @@ void face_talk() {
             //   lc.setRow(j, 7-i, openmouth[i]);
             //   break;
             case 3:
-              lc.setRow(j,  i, openmouth[i]);
-              break;
-          }
-        }
-      }
-    }
-
-    delay(100);
-    if (p == 6) {
-      for (int j = 0; j < 9; j++) {
-        for (int i = 0; i < 9; i++) {
-          switch (j) {
-            // case 0:
-            //   lc.setRow(j, 7-i, closemouth[i]);
-            //   break;
-            case 3:
-              lc.setRow(j, i, closemouth[i]);
+              lc.setRow(j, i, openmouth[i]);
               break;
           }
         }
@@ -183,9 +167,9 @@ void face_free() {
             case 1:
               lc.setRow(j, i, closeeye[i]);
               break;
-            // case 2:
-            //   lc.setRow(j, 7 - i, closeeye[i]);
-            //   break;
+              // case 2:
+              //   lc.setRow(j, 7 - i, closeeye[i]);
+              //   break;
           }
         }
       }
@@ -206,35 +190,35 @@ void face_free() {
       }
     }
     delay(10);
-     if (p == 2) {
-       for (int j = 0; j < 9; j++) {
-         for (int i = 0; i < 9; i++) {
-           switch (j) {
-             case 1:
-               lc.setRow(j, i, openeye[i]);
-               break;
-            //  case 2:
-            //    lc.setRow(j, 7 - i, openeye[i]);
-            //    break;
-           }
-         }
-       }
-     }
+    if (p == 2) {
+      for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < 9; i++) {
+          switch (j) {
+            case 1:
+              lc.setRow(j, i, openeye[i]);
+              break;
+              //  case 2:
+              //    lc.setRow(j, 7 - i, openeye[i]);
+              //    break;
+          }
+        }
+      }
+    }
     delay(600);
   }
 }
 int srf() {
-  distance=0;
+  distance = 0;
   for (int i = 0; i < 100; i++) {
-    digitalWrite(trig, LOW);           // set trig to LOW
-    delayMicroseconds(2);              // wait 2 microseconds
-    digitalWrite(trig, HIGH);          // set trig to HIGH
-    delayMicroseconds(10);             // wait 10 microseconds
-    digitalWrite(trig, LOW);           // set trig to LOW
-    duration = pulseIn(echo, HIGH);    // use the function pulsein to detect the time of the echo when it is in a high state
+    digitalWrite(trig, LOW);              // set trig to LOW
+    delayMicroseconds(2);                 // wait 2 microseconds
+    digitalWrite(trig, HIGH);             // set trig to HIGH
+    delayMicroseconds(10);                // wait 10 microseconds
+    digitalWrite(trig, LOW);              // set trig to LOW
+    duration = pulseIn(echo, HIGH);       // use the function pulsein to detect the time of the echo when it is in a high state
     distance += (duration * 0.0343 / 2);  // divide the time by 2 then multiply it by 0.0343
   }
-  distance=distance/100;
+  distance = distance / 100;
   return distance;
 }
 void setup() {
@@ -278,12 +262,11 @@ void loop() {
     //delay(500);
     player.play(1);
     face_talk();
-    while (millis() - time < 10500)
+    while (millis() - time < 20500)
       ;
-    delay(200);
     MODE = 0;
     //face_free();
-  } else if (MODE == 0) {
+  } else if (MODE == 0 ) {
     face_free();
     digitalWrite(sender, 0);
     MODE = 1;
