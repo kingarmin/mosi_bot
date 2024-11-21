@@ -1,7 +1,7 @@
 int SRF() {
   int distance = 0;
   long duration;
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 200; i++) {
     digitalWrite(trig, LOW);
     delayMicroseconds(2);
     // Sets the trigPin on HIGH state for 10 micro seconds

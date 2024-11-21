@@ -76,10 +76,10 @@ void setup() {
   }
   pinMode(trig, OUTPUT);  // Sets the trigPin as an Output
   pinMode(echo, INPUT);   // Sets the echoPin as an Input
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 5; i++) {
     avg += SRF();
   }
-  avg = avg / 10;
+  avg = avg / 5;
   face_talk();
   free_face();
   softwareSerial.begin(9600);
@@ -101,7 +101,7 @@ void loop() {
   if (dis < avg - 20 and mode == 0) {
     face_talk();
     MP3player.play(1);
-    delay(30000);
+    delay(19000);
     mode = 1;
   } else if (mode == 1) {
     mode = 0;
