@@ -12,5 +12,6 @@ int SRF() {
     distance += (duration * 0.034 / 2);
   }
   distance=distance/10;
+  Serial.println(distance);
   return distance;
 }

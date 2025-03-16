@@ -3,8 +3,8 @@
 #include "SoftwareSerial.h"
 #include "DFRobotDFPlayerMini.h"
 
-static const uint8_t PIN_MP3_TX = 12;
-static const uint8_t PIN_MP3_RX = 11;
+static const uint8_t PIN_MP3_TX = 5;
+static const uint8_t PIN_MP3_RX = 6;
 
 SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
 DFRobotDFPlayerMini MP3player;
@@ -59,14 +59,15 @@ uint8_t close_mounth[] = {
   0b11000
 };
 int avg = 0, mode = 0;
-const int trig = 7;
-const int echo = 6;
+const int trig = 11;
+const int echo = 12;
 void setup() {
   /*
    The MAX72XX is in power-saving mode on startup,
    we have to do a wakeup call
    */
   Serial.begin(9600);
+  Serial.print("ok");
   for (int i = 0; i < NBR_MTX; i++) {
     lc.shutdown(i, false);
     /* Set the brightness to a low value */
@@ -88,7 +89,7 @@ void setup() {
   } else {
     Serial.println("MP3 Player NOT READY");
   }
-  MP3player.volume(30);
+  MP3player.volume(13);
   delay(500);
   // MP3player.play(1);
   // delay(10000);
@@ -101,7 +102,7 @@ void loop() {
   if (dis < avg - 20 and mode == 0) {
     face_talk();
     MP3player.play(1);
-    delay(19000);
+    delay(5000);
     mode = 1;
   } else if (mode == 1) {
     mode = 0;
